@@ -1,5 +1,5 @@
 import unittest
-# Run file thru Terminal  => python -m unittest Task1.py
+# Run file thru Terminal  => python -m unittest PythonTask.py
 
 class MyClass(object):
 
