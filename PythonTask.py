@@ -14,8 +14,8 @@ class MyClass(object):
                     modify=pole.replace(item,',')
                     pole=modify
         pole2 = pole.split(',')
+        return pole2
 
-        return self.sumNumbers(pole2)
 
     def sumNumbers(self, arr):
         summa = 0
@@ -30,9 +30,9 @@ class MyClass(object):
         if (len(val)==0):
             return 0
         if (len(val)>=1):
-            arr=val.split(',')
-            res=self.sumNumbers(arr)
-            return res
+            pole2=self.getListWithoutDelimeters(val)
+            return self.sumNumbers(pole2)
+
 
 
 class TddInPythonExample(unittest.TestCase):
@@ -64,23 +64,24 @@ class TddInPythonExample(unittest.TestCase):
 
     def test_when_New_Lines(self):
         calc = MyClass()
-        res6 = calc.getListWithoutDelimeters("1\n2,3")
+        res6 = calc.add("1\n2,3")
         self.assertEqual(6, res6)
 
     def test_when_Delimiters(self):
         calc = MyClass()
-        res7 = calc.getListWithoutDelimeters("//[:]\n1;20***3%")
+        res7 = calc.add("//[:]\n1;20***3%")
         self.assertEqual(24, res7)
 
     def test_when_1000_Number_with_Delimiters_Ignored(self):
         calc = MyClass()
-        res8 = calc.getListWithoutDelimeters("//[:]\n2,1001")
+        res8 = calc.add("//[:]\n2,1001")
         self.assertEqual(2, res8)
 
     def test_when_1000_Number_with_Delimiters_Ignored2(self):
         calc = MyClass()
-        res8 = calc.getListWithoutDelimeters("//[:]\n2,1001=$20000")
+        res8 = calc.add("//[:]\n2,1001=$20000")
         self.assertEqual(2, res8)
 
 if __name__ == '__main__':
     unittest.main()
+
