@@ -34,11 +34,6 @@ class MyClass(object):
             res=self.sumNumbers(arr)
             return res
 
-    def removeDelimeters(self,delimeter, line):
-        result=line.replace(delimeter,',')
-        return result
-
-
 
 class TddInPythonExample(unittest.TestCase):
 
