@@ -1,16 +1,27 @@
 import unittest
-# Run file thru Terminal  => python -m unittest PythonTask.py
+# Run file thru Terminal  => python -m unittest Task1.py
 
 class MyClass(object):
 
     def __init__(self):
         return
 
+    def getListWithoutDelimeters(self, arr):
+        pole=arr
+        for item in pole:
+            if item.isnumeric()==False:
+                if item != ",":
+                    modify=pole.replace(item,',')
+                    pole=modify
+        pole2 = pole.split(',')
+
+        return self.sumNumbers(pole2)
+
     def sumNumbers(self, arr):
         summa = 0
         for item in arr:
-            if item!='':
-                if int(item)<1000:
+            if item.isnumeric() == True:
+                if int(item) < 1000:
                     summa = summa + int(item)
         return summa
 
@@ -27,13 +38,6 @@ class MyClass(object):
         result=line.replace(delimeter,',')
         return result
 
-    def when_Delimiters(self,lines):
-        arr1 = [ "\n" , "//" , "[:]" , ";" , "***","%"]
-        pole = lines
-        for item in arr1:
-            modify_arr=self.removeDelimeters(item, pole)
-            pole=modify_arr
-        return self.add(pole)
 
 
 class TddInPythonExample(unittest.TestCase):
@@ -65,19 +69,23 @@ class TddInPythonExample(unittest.TestCase):
 
     def test_when_New_Lines(self):
         calc = MyClass()
-        res6 = calc.when_Delimiters("1\n2,3")
+        res6 = calc.getListWithoutDelimeters("1\n2,3")
         self.assertEqual(6, res6)
 
     def test_when_Delimiters(self):
         calc = MyClass()
-        res7 = calc.when_Delimiters("//[:]\n1;20***3%")
+        res7 = calc.getListWithoutDelimeters("//[:]\n1;20***3%")
         self.assertEqual(24, res7)
 
     def test_when_1000_Number_with_Delimiters_Ignored(self):
         calc = MyClass()
-        res8 = calc.when_Delimiters("//[:]\n2,1001")
+        res8 = calc.getListWithoutDelimeters("//[:]\n2,1001")
+        self.assertEqual(2, res8)
+
+    def test_when_1000_Number_with_Delimiters_Ignored2(self):
+        calc = MyClass()
+        res8 = calc.getListWithoutDelimeters("//[:]\n2,1001=$20000")
         self.assertEqual(2, res8)
 
 if __name__ == '__main__':
     unittest.main()
-
